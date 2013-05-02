@@ -1,0 +1,17 @@
+﻿@model AutoTrade.Domain.Concrete.Brand
+
+@{
+    ViewBag.Title = "Edit "+@Model.Name;
+}
+
+<h2>Edit @Model.Name</h2>
+
+@using (Html.BeginForm("Edit", "AdminBrand")){
+    
+    @Html.EditorForModel()
+    <input type="submit" value="Save" />
+    
+    <button onclick="location.href='@Url.Action("BrandsDigest", "AdminBrand")';return false;">Cancel</button>
+    @*@Html.ActionLink("Cancel and return to List", "BrandsDigest")*@
+    
+}

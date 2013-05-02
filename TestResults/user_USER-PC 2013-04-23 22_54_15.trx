@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="57ed11a0-8c48-49b2-99ec-642144cade8a" name="user@USER-PC 2013-04-23 22:54:15" runUser="user-PC\user" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Локальные" id="df7179f4-4ccf-4547-80bd-4c3ff57a5370">
+    <Description>Это - параметры по умолчанию для локального тестового запуска.</Description>
+    <Deployment enabled="false" runDeploymentRoot="user_USER-PC 2013-04-23 22_54_15">
+      <DeploymentItem filename="i:\AutoTrade\AutoTrade.Tests\bin\Debug\Lib.Web.Mvc.dll" />
+      <DeploymentItem filename="i:\AutoTrade\packages\Ninject.MVC3.3.0.0.6\lib\net40-full\Ninject.Web.Mvc.dll" />
+      <DeploymentItem filename="i:\AutoTrade\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll" />
+      <DeploymentItem filename="i:\AutoTrade\packages\Moq.4.0.10827\lib\NET40\Moq.dll" />
+      <DeploymentItem filename="i:\AutoTrade\packages\Ninject.Web.Common.3.0.0.7\lib\net40-full\Ninject.Web.Common.dll" />
+      <DeploymentItem filename="i:\AutoTrade\AutoTrade.WebUI\bin\AutoTrade.WebUI.dll" />
+      <DeploymentItem filename="i:\AutoTrade\AutoTrade.Domain\bin\Debug\AutoTrade.Domain.dll" />
+      <DeploymentItem filename="i:\AutoTrade\AutoTrade.Tests\bin\Debug\EntityFramework.dll" />
+      <DeploymentItem filename="i:\AutoTrade\packages\WebActivator.1.5.3\lib\net40\WebActivator.dll" />
+      <DeploymentItem filename="i:\AutoTrade\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2013-04-23T22:54:15.0175781+03:00" queuing="2013-04-23T22:54:17.1386718+03:00" start="2013-04-23T22:54:17.4541015+03:00" finish="2013-04-23T22:55:00.1767578+03:00" />
+  <ResultSummary outcome="Error">
+    <Counters total="1" executed="1" error="0" failed="0" timeout="0" aborted="1" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="USER-PC" outcome="Error" timestamp="2013-04-23T22:55:00.1748046+03:00">
+        <Text>Test host process exited unexpectedly.</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="CanEditBrand" storage="i:\autotrade\autotrade.tests\bin\debug\autotrade.tests.dll" id="58b97f67-958c-9ccc-9185-97af23951c9d">
+      <Execution id="0ea29d0f-b1d7-41d2-b340-8018067c2dc7" />
+      <TestMethod codeBase="i:/AutoTrade/AutoTrade.Tests/bin/Debug/AutoTrade.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="AutoTrade.Tests.AdminBrandControllerTest, AutoTrade.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="CanEditBrand" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Отсутствующие в списке результаты" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="Все загруженные результаты" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="58b97f67-958c-9ccc-9185-97af23951c9d" executionId="0ea29d0f-b1d7-41d2-b340-8018067c2dc7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="0ea29d0f-b1d7-41d2-b340-8018067c2dc7" testId="58b97f67-958c-9ccc-9185-97af23951c9d" testName="CanEditBrand" computerName="USER-PC" duration="00:00:42.5068360" startTime="2013-04-23T22:54:17.6699218+03:00" endTime="2013-04-23T22:55:00.1767578+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Aborted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0ea29d0f-b1d7-41d2-b340-8018067c2dc7">
+    </UnitTestResult>
+  </Results>
+</TestRun>

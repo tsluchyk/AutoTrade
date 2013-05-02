@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="9d7a5183-8d22-472f-8ebd-a6c890d08279" name="user@USER-PC 2013-04-06 16:12:43" runUser="user-PC\user" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Локальные" id="df7179f4-4ccf-4547-80bd-4c3ff57a5370">
+    <Description>Это - параметры по умолчанию для локального тестового запуска.</Description>
+    <Deployment enabled="false" runDeploymentRoot="user_USER-PC 2013-04-06 16_12_43">
+      <DeploymentItem filename="i:\AutoTrade\packages\Ninject.MVC3.3.0.0.6\lib\net40-full\Ninject.Web.Mvc.dll" />
+      <DeploymentItem filename="i:\AutoTrade\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll" />
+      <DeploymentItem filename="i:\AutoTrade\packages\Moq.4.0.10827\lib\NET40\Moq.dll" />
+      <DeploymentItem filename="i:\AutoTrade\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll" />
+      <DeploymentItem filename="I:\AutoTrade\AutoTrade.Domain\bin\Debug\AutoTrade.Domain.dll" />
+      <DeploymentItem filename="I:\AutoTrade\AutoTrade.WebUI\bin\AutoTrade.WebUI.dll" />
+      <DeploymentItem filename="i:\AutoTrade\packages\WebActivator.1.5.3\lib\net40\WebActivator.dll" />
+      <DeploymentItem filename="i:\AutoTrade\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll" />
+      <DeploymentItem filename="i:\AutoTrade\packages\Ninject.Web.Common.3.0.0.7\lib\net40-full\Ninject.Web.Common.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2013-04-06T16:12:43.4218750+03:00" queuing="2013-04-06T16:12:43.5224609+03:00" start="2013-04-06T16:12:43.5537109+03:00" finish="2013-04-06T16:12:44.2539062+03:00" />
+  <ResultSummary outcome="Completed">
+    <Counters total="3" executed="3" passed="3" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="CanPaging" storage="i:\autotrade\autotrade.tests\bin\debug\autotrade.tests.dll" id="b92d9c43-becc-4253-db34-e46e12ecb35e">
+      <Execution id="3619227b-402e-4466-b5c4-94a2dbaac0b7" />
+      <TestMethod codeBase="i:/AutoTrade/AutoTrade.Tests/bin/Debug/AutoTrade.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="AutoTrade.Tests.AutoModelControllerTest, AutoTrade.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="CanPaging" />
+    </UnitTest>
+    <UnitTest name="PageLinksTest" storage="i:\autotrade\autotrade.tests\bin\debug\autotrade.tests.dll" id="5623811e-0a4e-4d4e-2097-ce16999be2d5">
+      <Execution id="e415ea31-df6d-4f97-ba91-52dc505dbd0c" />
+      <TestMethod codeBase="i:/AutoTrade/AutoTrade.Tests/bin/Debug/AutoTrade.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="AutoTrade.Tests.PagingHelpersTest, AutoTrade.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="PageLinksTest" />
+    </UnitTest>
+    <UnitTest name="TestMethod1" storage="i:\autotrade\autotrade.tests\bin\debug\autotrade.tests.dll" id="c005e91d-c3db-93c5-b99e-68399b239535">
+      <Execution id="65a23539-70c7-459e-90cf-56db21a94825" />
+      <TestMethod codeBase="i:/AutoTrade/AutoTrade.Tests/bin/Debug/AutoTrade.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="AutoTrade.Tests.UnitTest1, AutoTrade.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestMethod1" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Отсутствующие в списке результаты" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="Все загруженные результаты" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="5623811e-0a4e-4d4e-2097-ce16999be2d5" executionId="e415ea31-df6d-4f97-ba91-52dc505dbd0c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b92d9c43-becc-4253-db34-e46e12ecb35e" executionId="3619227b-402e-4466-b5c4-94a2dbaac0b7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c005e91d-c3db-93c5-b99e-68399b239535" executionId="65a23539-70c7-459e-90cf-56db21a94825" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="e415ea31-df6d-4f97-ba91-52dc505dbd0c" testId="5623811e-0a4e-4d4e-2097-ce16999be2d5" testName="PageLinksTest" computerName="USER-PC" duration="00:00:00.0499957" startTime="2013-04-06T16:12:43.5605468+03:00" endTime="2013-04-06T16:12:43.8876953+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e415ea31-df6d-4f97-ba91-52dc505dbd0c">
+    </UnitTestResult>
+    <UnitTestResult executionId="3619227b-402e-4466-b5c4-94a2dbaac0b7" testId="b92d9c43-becc-4253-db34-e46e12ecb35e" testName="CanPaging" computerName="USER-PC" duration="00:00:00.2624640" startTime="2013-04-06T16:12:43.9013671+03:00" endTime="2013-04-06T16:12:44.1689453+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3619227b-402e-4466-b5c4-94a2dbaac0b7">
+    </UnitTestResult>
+    <UnitTestResult executionId="65a23539-70c7-459e-90cf-56db21a94825" testId="c005e91d-c3db-93c5-b99e-68399b239535" testName="TestMethod1" computerName="USER-PC" duration="00:00:00.0006696" startTime="2013-04-06T16:12:44.1718750+03:00" endTime="2013-04-06T16:12:44.1894531+03:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="65a23539-70c7-459e-90cf-56db21a94825">
+    </UnitTestResult>
+  </Results>
+</TestRun>

@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{33A74806-1FA6-4979-87BA-B87FCF309D25}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AutoTrade.Domain</RootNamespace>
+    <AssemblyName>AutoTrade.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abstract\IAutoModelsRepository.cs" />
+    <Compile Include="Abstract\IBrandsRepository.cs" />
+    <Compile Include="Abstract\ISpecification.cs" />
+    <Compile Include="Abstract\IVehiclesRepository.cs" />
+    <Compile Include="Abstract\IVehiclesSummaryRepository.cs" />
+    <Compile Include="Concrete\AutoModel.cs">
+      <DependentUpon>AutoTradeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Concrete\AutoModelSpecification.cs" />
+    <Compile Include="Concrete\AutoModelsRepository.cs" />
+    <Compile Include="Concrete\AutoTradeModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AutoTradeModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Concrete\AutoTradeModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AutoTradeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Concrete\AutoTradeModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AutoTradeModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Concrete\Brand.cs">
+      <DependentUpon>AutoTradeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Concrete\Specifications\BrandSpecification.cs" />
+    <Compile Include="Concrete\BrandsRepository.cs" />
+    <Compile Include="Concrete\Specifications\CapacitySpecification.cs" />
+    <Compile Include="Concrete\Specifications\ColorVehicleSpecification.cs" />
+    <Compile Include="Concrete\PricesHistory.cs">
+      <DependentUpon>AutoTradeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Concrete\Specifications\PriceSpecification.cs" />
+    <Compile Include="Concrete\Vehicle.cs">
+      <DependentUpon>AutoTradeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Concrete\VehicleRepository.cs" />
+    <Compile Include="Concrete\VehiclesDetails.cs" />
+    <Compile Include="Concrete\Specifications\VehicleSearchSpecification.cs" />
+    <Compile Include="Concrete\VehiclesSummary.cs" />
+    <Compile Include="Concrete\VehiclesSummaryRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_SortDirection.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Concrete\AutoTradeModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AutoTradeModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="Concrete\AutoTradeModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AutoTradeModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Concrete\AutoTradeModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AutoTradeModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

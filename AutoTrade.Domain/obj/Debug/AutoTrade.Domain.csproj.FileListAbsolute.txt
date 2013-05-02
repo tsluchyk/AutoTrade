@@ -1,0 +1,16 @@
+I:\AutoTrade\AutoTrade.Domain\bin\Debug\AutoTrade.Domain.dll.config
+I:\AutoTrade\AutoTrade.Domain\bin\Debug\AutoTrade.Domain.dll
+I:\AutoTrade\AutoTrade.Domain\bin\Debug\AutoTrade.Domain.pdb
+I:\AutoTrade\AutoTrade.Domain\bin\Debug\EntityFramework.dll
+I:\AutoTrade\AutoTrade.Domain\bin\Debug\EntityFramework.xml
+I:\AutoTrade\AutoTrade.Domain\obj\Debug\ResolveAssemblyReference.cache
+I:\AutoTrade\AutoTrade.Domain\obj\Debug\AutoTrade.Domain.dll
+I:\AutoTrade\AutoTrade.Domain\obj\Debug\AutoTrade.Domain.pdb
+i:\BIT\AutoTradeSVN\AutoTrade\AutoTrade.Domain\bin\Debug\AutoTrade.Domain.dll.config
+i:\BIT\AutoTradeSVN\AutoTrade\AutoTrade.Domain\bin\Debug\AutoTrade.Domain.dll
+i:\BIT\AutoTradeSVN\AutoTrade\AutoTrade.Domain\bin\Debug\AutoTrade.Domain.pdb
+i:\BIT\AutoTradeSVN\AutoTrade\AutoTrade.Domain\bin\Debug\EntityFramework.dll
+i:\BIT\AutoTradeSVN\AutoTrade\AutoTrade.Domain\bin\Debug\EntityFramework.xml
+i:\BIT\AutoTradeSVN\AutoTrade\AutoTrade.Domain\obj\Debug\ResolveAssemblyReference.cache
+i:\BIT\AutoTradeSVN\AutoTrade\AutoTrade.Domain\obj\Debug\AutoTrade.Domain.dll
+i:\BIT\AutoTradeSVN\AutoTrade\AutoTrade.Domain\obj\Debug\AutoTrade.Domain.pdb

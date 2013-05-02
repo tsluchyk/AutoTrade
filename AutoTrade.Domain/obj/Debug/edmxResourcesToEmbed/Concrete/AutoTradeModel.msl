@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AutoTradeModelStoreContainer" CdmEntityContainer="AutoTradeEntities">
+    <EntitySetMapping Name="AutoModels">
+      <EntityTypeMapping TypeName="AutoTradeModel.AutoModel">
+        <MappingFragment StoreEntitySet="AutoModels">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdBrand" ColumnName="IdBrand" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Brands">
+      <EntityTypeMapping TypeName="AutoTradeModel.Brand">
+        <MappingFragment StoreEntitySet="Brands">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PricesHistories">
+      <EntityTypeMapping TypeName="AutoTradeModel.PricesHistory">
+        <MappingFragment StoreEntitySet="PricesHistory">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdVehicle" ColumnName="IdVehicle" />
+          <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vehicles">
+      <EntityTypeMapping TypeName="AutoTradeModel.Vehicle">
+        <MappingFragment StoreEntitySet="Vehicles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdAutoModel" ColumnName="IdAutoModel" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="CubicCapacity" ColumnName="CubicCapacity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

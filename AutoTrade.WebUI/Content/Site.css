@@ -1,0 +1,69 @@
+﻿html,body
+{
+    margin:0em;
+    padding:0em;
+    height:100%;
+}
+
+#container
+{
+    position:relative;
+    max-width: 1500px;
+    min-width:800px;
+    width:expression(
+        (document.compatMode && document.compatMode == 'CSS1Compat')
+        ?
+        (
+        document.documentElement.clientWidth < 800
+        ?
+        "800px"
+        :
+        "auto"
+        )
+        :
+        (
+        document.body.clientWidth < 800
+        ?
+        "800px"
+        :
+        "auto"
+        )
+        );
+    margin: 0 auto;
+    min-height:100%;
+    height:auto !important;
+    height:100%;
+}
+
+#categories
+{
+    width:13em;
+    background:rgb(184, 203, 206);
+    float:left;
+}
+#content
+{
+    min-height:100%;
+    margin-left:13em;
+    background:rgb(239, 247, 246);
+}
+
+#footer
+{
+    clear: both;
+    position:relative;
+    height:2em;
+    margin-top:-2em;
+}
+
+#header,#footer
+{
+    background:rgb(142, 173, 170);
+    text-align:center;
+}
+#header
+{
+    height:3em;
+    padding:1em;
+    font-size:2em;
+}

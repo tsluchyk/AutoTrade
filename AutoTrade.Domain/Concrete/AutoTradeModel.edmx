@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AutoTradeModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="AutoTradeModelStoreContainer">
+          <EntitySet Name="AutoModels" EntityType="AutoTradeModel.Store.AutoModels" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Brands" EntityType="AutoTradeModel.Store.Brands" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PricesHistory" EntityType="AutoTradeModel.Store.PricesHistory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Vehicles" EntityType="AutoTradeModel.Store.Vehicles" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="fk_IdAutoModel" Association="AutoTradeModel.Store.fk_IdAutoModel">
+            <End Role="AutoModels" EntitySet="AutoModels" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_IdBrand" Association="AutoTradeModel.Store.fk_IdBrand">
+            <End Role="Brands" EntitySet="Brands" />
+            <End Role="AutoModels" EntitySet="AutoModels" />
+          </AssociationSet>
+          <AssociationSet Name="fk_IdVehicle" Association="AutoTradeModel.Store.fk_IdVehicle">
+            <End Role="Vehicles" EntitySet="Vehicles" />
+            <End Role="PricesHistory" EntitySet="PricesHistory" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AutoModels">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdBrand" Type="int" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Brands">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PricesHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdVehicle" Type="int" />
+          <Property Name="ChangeDate" Type="date" Nullable="false" />
+          <Property Name="Price" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Vehicles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdAutoModel" Type="int" />
+          <Property Name="Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="CubicCapacity" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Price" Type="decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="fk_IdAutoModel">
+          <End Role="AutoModels" Type="AutoTradeModel.Store.AutoModels" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Vehicles" Type="AutoTradeModel.Store.Vehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AutoModels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="IdAutoModel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_IdBrand">
+          <End Role="Brands" Type="AutoTradeModel.Store.Brands" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AutoModels" Type="AutoTradeModel.Store.AutoModels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brands">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AutoModels">
+              <PropertyRef Name="IdBrand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_IdVehicle">
+          <End Role="Vehicles" Type="AutoTradeModel.Store.Vehicles" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PricesHistory" Type="AutoTradeModel.Store.PricesHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PricesHistory">
+              <PropertyRef Name="IdVehicle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AutoTradeModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="AutoTradeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AutoModels" EntityType="AutoTradeModel.AutoModel" />
+          <EntitySet Name="Brands" EntityType="AutoTradeModel.Brand" />
+          <EntitySet Name="PricesHistories" EntityType="AutoTradeModel.PricesHistory" />
+          <EntitySet Name="Vehicles" EntityType="AutoTradeModel.Vehicle" />
+          <AssociationSet Name="fk_IdAutoModel" Association="AutoTradeModel.fk_IdAutoModel">
+            <End Role="AutoModels" EntitySet="AutoModels" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_IdBrand" Association="AutoTradeModel.fk_IdBrand">
+            <End Role="Brands" EntitySet="Brands" />
+            <End Role="AutoModels" EntitySet="AutoModels" />
+          </AssociationSet>
+          <AssociationSet Name="fk_IdVehicle" Association="AutoTradeModel.fk_IdVehicle">
+            <End Role="Vehicles" EntitySet="Vehicles" />
+            <End Role="PricesHistory" EntitySet="PricesHistories" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AutoModel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdBrand" Type="Int32" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Vehicles" Relationship="AutoTradeModel.fk_IdAutoModel" FromRole="AutoModels" ToRole="Vehicles" />
+          <NavigationProperty Name="Brand" Relationship="AutoTradeModel.fk_IdBrand" FromRole="AutoModels" ToRole="Brands" />
+        </EntityType>
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="AutoModels" Relationship="AutoTradeModel.fk_IdBrand" FromRole="Brands" ToRole="AutoModels" />
+        </EntityType>
+        <EntityType Name="PricesHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdVehicle" Type="Int32" />
+          <Property Name="ChangeDate" Type="DateTime" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="Vehicle" Relationship="AutoTradeModel.fk_IdVehicle" FromRole="PricesHistory" ToRole="Vehicles" />
+        </EntityType>
+        <EntityType Name="Vehicle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAutoModel" Type="Int32" />
+          <Property Name="Color" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CubicCapacity" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Description" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="AutoModel" Relationship="AutoTradeModel.fk_IdAutoModel" FromRole="Vehicles" ToRole="AutoModels" />
+          <NavigationProperty Name="PricesHistories" Relationship="AutoTradeModel.fk_IdVehicle" FromRole="Vehicles" ToRole="PricesHistory" />
+        </EntityType>
+        <Association Name="fk_IdAutoModel">
+          <End Role="AutoModels" Type="AutoTradeModel.AutoModel" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Vehicles" Type="AutoTradeModel.Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AutoModels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="IdAutoModel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_IdBrand">
+          <End Role="Brands" Type="AutoTradeModel.Brand" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AutoModels" Type="AutoTradeModel.AutoModel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brands">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AutoModels">
+              <PropertyRef Name="IdBrand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_IdVehicle">
+          <End Role="Vehicles" Type="AutoTradeModel.Vehicle" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PricesHistory" Type="AutoTradeModel.PricesHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PricesHistory">
+              <PropertyRef Name="IdVehicle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AutoTradeModelStoreContainer" CdmEntityContainer="AutoTradeEntities">
+          <EntitySetMapping Name="AutoModels"><EntityTypeMapping TypeName="AutoTradeModel.AutoModel"><MappingFragment StoreEntitySet="AutoModels">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="IdBrand" ColumnName="IdBrand" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Brands"><EntityTypeMapping TypeName="AutoTradeModel.Brand"><MappingFragment StoreEntitySet="Brands">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PricesHistories"><EntityTypeMapping TypeName="AutoTradeModel.PricesHistory"><MappingFragment StoreEntitySet="PricesHistory">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="IdVehicle" ColumnName="IdVehicle" />
+            <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+            <ScalarProperty Name="Price" ColumnName="Price" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Vehicles"><EntityTypeMapping TypeName="AutoTradeModel.Vehicle"><MappingFragment StoreEntitySet="Vehicles">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="IdAutoModel" ColumnName="IdAutoModel" />
+            <ScalarProperty Name="Color" ColumnName="Color" />
+            <ScalarProperty Name="CubicCapacity" ColumnName="CubicCapacity" />
+            <ScalarProperty Name="Price" ColumnName="Price" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Отсутствует" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="AutoTradeModel">
+        <EntityTypeShape EntityType="AutoTradeModel.AutoModel" Width="1.5" PointX="3" PointY="1.25" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoTradeModel.Brand" Width="1.5" PointX="0.75" PointY="1.375" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoTradeModel.PricesHistory" Width="1.5" PointX="7.5" PointY="1.25" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoTradeModel.Vehicle" Width="1.5" PointX="5.25" PointY="1" Height="2.5571907552083335" IsExpanded="true" />
+        <AssociationConnector Association="AutoTradeModel.fk_IdAutoModel" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="2.2401432291666667" />
+          <ConnectorPoint PointX="5.25" PointY="2.2401432291666667" />
+        </AssociationConnector>
+        <AssociationConnector Association="AutoTradeModel.fk_IdBrand" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.172841796875" />
+          <ConnectorPoint PointX="3" PointY="2.172841796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="AutoTradeModel.fk_IdVehicle" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="2.2401432291666667" />
+          <ConnectorPoint PointX="7.5" PointY="2.2401432291666667" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<AutoTrade.Domain.Concrete.Brand>
+
+@{
+    ViewBag.Title = "Brands Digest";
+}
+
+<h2>Brands Digest</h2>
+
+<button onclick="location.href='@Url.Action("Create", "AdminBrand")'">Create</button>
+
+@* <p>@Html.ActionLink("Add new brand", "Create")</p>*@
+
+@using (Ajax.BeginForm("BrandsDigest", "AdminBrand", new AjaxOptions
+    {
+        HttpMethod = "Get",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "tableBrands"
+    },
+    new { id="formBrands"}))
+{
+    <fieldset><legend>Search</legend>
+    <div class="search">
+        <p>Brands: @Html.DropDownList("IdBrand", new SelectList(Model, "Id", "Name"), String.Empty)
+        <input type="submit" value="Search" id="btnSubmit" style="visibility:hidden" /></p>
+    </div>
+    </fieldset>
+}
+
+<div id="tableBrands">
+        @Html.Partial("Ajax_BrandTable", Model)
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#IdBrand').change(function () {
+            document.getElementById("btnSubmit").click();
+        });
+    });
+</script>
+
+

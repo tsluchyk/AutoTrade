@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AutoTrade.Domain.Concrete.VehiclesDetails>
+
+@{
+    ViewBag.Title = "VehiclesDigest";
+}
+
+<h2>Vehicles Digest</h2>
+
+<button onclick="location.href='@Url.Action("Create", "AdminVehicle")'">Create</button>
+
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+
+
+@using (Ajax.BeginForm("VehiclesDigest", "AdminVehicle", new AjaxOptions
+    {
+        HttpMethod = "Get",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "tableVehicle"
+    },
+    new { id = "formVehicle" }))
+{
+    <fieldset><legend>Search</legend>
+    <div class="search">
+        <p>Auto model: @Html.DropDownList("ActualAutoModels", String.Empty)
+         <input type="submit" value="Search" id="btnSubmit" style="visibility:hidden"/></p>
+    </div>
+    </fieldset> 
+}
+
+
+<div id="tableVehicle">
+        @Html.Partial("Ajax_VehicleTable", Model)
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#ActualAutoModels').change(function () {
+            document.getElementById("btnSubmit").click();
+        });
+
+    });
+
+</script>

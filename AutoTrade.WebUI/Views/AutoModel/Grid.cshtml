@@ -1,0 +1,165 @@
+﻿@model AutoTrade.WebUI.Models.VehiclesSummaryModelForPaging
+           
+@using AutoTrade.WebUI.Infrastructure;
+@using AutoTrade.Domain.Concrete;
+
+
+@*Items per page: @Html.DropDownList("ItemsPerPage",
+                                    new SelectList(new[] { "5", "10", "50", "100" }),
+                                   String.Empty)*@
+@*@section scriptsGrid{
+    <script src="@Url.Content("~/Scripts/webGrid.js")" type="text/javascript"></script>
+ }*@
+
+ @using (Ajax.BeginForm("Grid", "AutoModel", new AjaxOptions
+ {
+     HttpMethod = "Get",
+     InsertionMode = InsertionMode.Replace,
+     UpdateTargetId = "gridContainer"
+ },
+ new { id = "filter" }))
+ {
+     <fieldset id="fieldsetSearch" style="visibility:hidden; display:none"><legend>Search</legend>
+        <div class="search">
+            <label id="gridSearchText" style="width:6em; display:inline-block"></label>
+            <span id="spAutoModels" style="visibility:hidden; display:none">@Html.DropDownList("ActualAutoModels", String.Empty)</span>
+            <span id="spBrands" style="visibility:hidden; display:none">@Html.DropDownList("ActualBrands",String.Empty)</span>
+        </div>
+     </fieldset>
+     <table>
+         <tr>
+             <td class="tdInfo"> Color:</td>
+             <td>@Html.TextBox("color")</td>
+         </tr>
+         <tr>
+             <td class="tdInfo">Capacity:</td>
+             <td> @Html.TextBox("capacity")</td>
+         </tr>
+         <tr>
+             <td class="tdInfo">min price:</td>
+             <td><input type="text" id="minPrice" name="minPrice" /></td>
+         </tr>
+         <tr>
+             <td class="tdInfo">max price:</td>
+             <td><input type="text" id="maxPrice" name="maxPrice" /></td>
+         </tr>
+         <tr>
+            <td><input id="btnSubmit" type="submit" class="button" value="Search" /></td>
+         </tr>
+         <tr>
+            <td>
+                <div id="itemsPerPage">
+                Items per page: @Html.DropDownList("ItemsPerPage",
+                                    new SelectList(new[] { "5", "10", "50", "100" }),
+                                   String.Empty)
+                </div>
+            </td>
+         </tr>
+     </table>
+  }  
+     @*<div id="itemsPerPage">
+     Items per page: @Html.DropDownList("ItemsPerPage",
+                                    new SelectList(new[] { "5", "10", "50", "100" }),
+                                   String.Empty)
+     </div>*@
+     
+     <div id="gridContainer">
+     @Html.Partial("Ajax_Grid", Model)
+     </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".visibility").live('click', _hiddeColumn);
+
+        function _hiddeColumn() {
+            var num = $(this).closest("th").index()+1;
+            $("#ajaxGrid thead th:nth-child(" + num + ")").attr("style", "display:none");
+            $("#ajaxGrid tbody td:nth-child(" + num + ")").attr("style", "display:none");
+
+            return false;
+        };
+
+
+        $('#gridContainer table thead tr a').live('click', _updateGrid); // hook up ajax refresh for sorting links
+        $('#gridContainer table tfoot tr a').live('click', _updateGrid); // hook up ajax refresh for paging links 
+
+        function _updateGrid(e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            var grid = $(this).parents('#ajaxGrid'); // get the grid
+            grid.load(url);
+        };
+
+        $('#ActualBrands').change(function () {
+            document.getElementById("btnSubmit").click();
+        });
+
+        $('#ActualAutoModels').change(function () {
+            document.getElementById("btnSubmit").click();
+        });
+
+        $('#ItemsPerPage').change(function () {
+            document.getElementById("btnSubmit").click();
+
+        });
+
+        $("#color").autocomplete({
+            source: function (request, response) {
+                $.getJSON("/AutoModel/GetUniqueColors?term=" + request.term, function (data) {
+                    response(data);
+                });
+            },
+            minLength: 2,
+            delay: 300
+        });
+
+
+        $("#capacity").autocomplete({
+            source: function (request, response) {
+                $.getJSON("/AutoModel/GetUniqueCapacity?term=" + request.term, function (data) {
+                    response(data);
+                });
+            },
+            minLength: 2,
+            delay: 300
+        });
+
+
+
+        //                $('#ItemsPerPage').change(function () {
+        //                    ChangeItemsPerPage(this.value);
+        //                });
+        //                function ChangeItemsPerPage(count) {
+        //                    $.ajax({
+        //                        type: "POST",
+        //                        url: '@Url.Action("ChangeItemsPerPage", "AutoModel")',
+        //                        data: { "count": count },
+        //                        success: UpdateGrid
+        //                    });
+        //                };
+        //        function UpdateGrid() {
+        //            $.ajax({
+        //                type: "GET",
+        //                url: '@Url.Action("Grid", "AutoModel")',
+        //                success: function (data) {
+        //                    $("#gridContainer").html(data)
+        //                }
+        //            });
+        //        };
+    });
+
+</script>
+
+
+@*<div id="gridContainer">
+@Html.Partial("Ajax_Grid", Model)
+</div>*@
+
+@*<p>
+Model.VehiclesSummary.Count()= @Model.VehiclesSummary.Count()
+</p>
+<p>
+Model.TotalItems = @Model._PagingInfo.TotalItems
+</p>*@
