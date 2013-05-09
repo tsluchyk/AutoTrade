@@ -6,13 +6,7 @@
 
 <h2>Vehicles Digest</h2>
 
-<button onclick="location.href='@Url.Action("Create", "AdminVehicle")'">Create</button>
-
-
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
-
+<button class="btn btn-primary" onclick="location.href='@Url.Action("Create", "AdminVehicle")'">Create new vehicle</button>
 
 @using (Ajax.BeginForm("VehiclesDigest", "AdminVehicle", new AjaxOptions
     {
@@ -22,14 +16,14 @@
     },
     new { id = "formVehicle" }))
 {
-    <fieldset><legend>Search</legend>
-    <div class="search">
-        <p>Auto model: @Html.DropDownList("ActualAutoModels", String.Empty)
-         <input type="submit" value="Search" id="btnSubmit" style="visibility:hidden"/></p>
+    <div class="well well-small">
+        <fieldset><legend>Search</legend>
+            <label class="control-label">Auto model:</label>
+            @Html.DropDownList("ActualAutoModels", String.Empty)
+            <input type="submit" value="Search" id="btnSubmit" style="visibility:hidden"/>
+        </fieldset> 
     </div>
-    </fieldset> 
 }
-
 
 <div id="tableVehicle">
         @Html.Partial("Ajax_VehicleTable", Model)

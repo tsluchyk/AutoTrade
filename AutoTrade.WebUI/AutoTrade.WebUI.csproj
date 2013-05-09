@@ -103,7 +103,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\backGround3.jpg" />
-    <Content Include="Content\GridStyle.css" />
+    <Content Include="Content\bootstrap-responsive.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\GridStyle1.css" />
     <Content Include="Content\images\delete.png" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\Site.css" />
@@ -229,7 +231,9 @@
   <ItemGroup>
     <Content Include="Views\AdminBrand\Ajax_BrandTable.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Shared\MenuNavigation.cshtml" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

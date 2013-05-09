@@ -11,29 +11,12 @@ namespace AutoTrade.WebUI.Controllers
 {
     public class AutoModelController : Controller
     {
-        //private IBrandsRepository brandsRepository;
-        //private IAutoModelsRepository autoModelRepository;
-        //private IVehiclesRepository vehiclesRepository;
-
         private IVehiclesSummaryRepository vehiclesSummaryRepository;
-       // static int _pageSize = 30;
-
-        //public int PageSize
-        //{
-        //    get { return _pageSize; }
-        //    set { _pageSize = value; }
-        //}
-        //public List<string> DropDownItems { private set; get; }
 
         public AutoModelController(IVehiclesSummaryRepository repo)
         {
             vehiclesSummaryRepository = repo;
-           // DropDownItems = new List<string> { "10", "50", "100", "all" };
         }
-        /*int? page, int? rowsPerPage, 
-              string sort, string sortdir, 
-              string orderNumber, string person, string product*/
-        
 
         public ActionResult Grid(string color=null,
                                 decimal? capacity = null,
@@ -53,11 +36,9 @@ namespace AutoTrade.WebUI.Controllers
             
             VehiclesSummaryModelForPaging vehiclesModel = new VehiclesSummaryModelForPaging
             {
-                //VehiclesSummary=vehiclesSummaryRepository.GetSequenceVehicles
                 VehiclesSummary = vehiclesSummaryRepository.GetExtensionSequenceVehicles
                 (
                 out totalItems,
-                //itemPerPage: PageSize,
                 itemPerPage: itemsPerPage,
                 pageIndex: page -1,
                 sort: sort,
@@ -72,13 +53,11 @@ namespace AutoTrade.WebUI.Controllers
                 _PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
-                   // ItemsPerPage = PageSize,
                     ItemsPerPage = itemsPerPage,
                     TotalItems = vehiclesSummaryRepository.VehiclesSummary.Count()
                 }
             };
 
-            //ViewBag.TotalItems = vehiclesModel.VehiclesSummary.Count();
 
             if (Request.IsAjaxRequest())
             {
@@ -101,11 +80,6 @@ namespace AutoTrade.WebUI.Controllers
             return _SortDirection.Ascending;
         }
 
-        //[WebMethod]
-        //public void ChangeItemsPerPage(string count)
-        //{
-        //    PageSize = Convert.ToInt32(count);
-        //}
 
         [WebMethod]
         public JsonResult GetUniqueColors(string term)
@@ -114,12 +88,6 @@ namespace AutoTrade.WebUI.Controllers
             return Json(colors, JsonRequestBehavior.AllowGet);
         }
 
-        //[WebMethod]
-        //public JsonResult GetUniqueCapacity(string term)
-        //{
-        //    var capacities = vehiclesSummaryRepository.GetUniqueCapacity(term, 10);
-        //    return Json(capacities, JsonRequestBehavior.AllowGet);
-        //}
 
         [WebMethod]
         public JsonResult GetUniqueCapacity(string term)

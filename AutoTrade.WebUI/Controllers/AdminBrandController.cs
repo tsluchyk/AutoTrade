@@ -19,7 +19,6 @@ namespace AutoTrade.WebUI.Controllers
 
         public ActionResult BrandsDigest(int? IdBrand)
         {
-            //IQueryable<Brand> brands=null;
             List<Brand> brands = new List<Brand>();
 
             if (IdBrand == null)
@@ -28,7 +27,6 @@ namespace AutoTrade.WebUI.Controllers
             else
             {
                 brands.Add(repository.GetBrandById((int)IdBrand));
-                //var unit = brands.Concat(new Brand[] { repository.GetBrandById((int)IdBrand) });
             }
 
             if(Request.IsAjaxRequest())
@@ -42,6 +40,7 @@ namespace AutoTrade.WebUI.Controllers
         public ViewResult Edit(int id)
         {
             Brand brand = repository.GetBrandById(id);
+            ViewBag.Admin = 1;
             return View(brand);
         }
 
@@ -62,6 +61,7 @@ namespace AutoTrade.WebUI.Controllers
 
         public ViewResult Create()
         {
+            ViewBag.Admin = 0;
             return View("Edit", new Brand());
         }
 
