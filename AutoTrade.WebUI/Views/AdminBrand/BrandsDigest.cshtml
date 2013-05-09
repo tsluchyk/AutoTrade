@@ -5,9 +5,7 @@
 }
 
 <h2>Brands Digest</h2>
-
-<button onclick="location.href='@Url.Action("Create", "AdminBrand")'">Create</button>
-
+<button onclick="location.href='@Url.Action("Create", "AdminBrand")'" class="btn btn-primary">Create new brand</button>
 @* <p>@Html.ActionLink("Add new brand", "Create")</p>*@
 
 @using (Ajax.BeginForm("BrandsDigest", "AdminBrand", new AjaxOptions
@@ -18,12 +16,13 @@
     },
     new { id="formBrands"}))
 {
-    <fieldset><legend>Search</legend>
-    <div class="search">
-        <p>Brands: @Html.DropDownList("IdBrand", new SelectList(Model, "Id", "Name"), String.Empty)
-        <input type="submit" value="Search" id="btnSubmit" style="visibility:hidden" /></p>
+    <div class="well well-small">
+        <fieldset><legend>Search</legend>
+                     <label class="control-label">Brands:</label>
+                     @Html.DropDownList("IdBrand", new SelectList(Model, "Id", "Name"), String.Empty)
+                     <input type="submit" value="Search" id="btnSubmit" style="visibility:hidden" />
+        </fieldset>
     </div>
-    </fieldset>
 }
 
 <div id="tableBrands">

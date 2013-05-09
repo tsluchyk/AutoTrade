@@ -19,48 +19,6 @@ namespace AutoTrade.WebUI.Controllers
             brandsRepository = repo;
         }
 
-        //[HttpGet]
-        //public ActionResult RenderTree()
-        //{
-        //    return PartialView(SetTree());
-        //}
-
-        //[HttpGet]
-        //public ActionResult GetAutoModel(int id)
-        //{
-        //    return Json
-        //        (
-        //        new { }, JsonRequestBehavior.AllowGet
-        //        );
-        //}
-
-        //private IList<NodeTreeView> SetTree()
-        //{
-        //    IList<NodeTreeView> brands = new List<NodeTreeView>();
-
-        //    foreach (var brand in brandsRepository.Brands)
-        //    {
-        //        var node = new NodeTreeView
-        //        {
-        //            Id=brand.Id,
-        //            Name=brand.Name,
-        //            Type="brand"
-        //        };
-        //        foreach (var autoModel in brand.AutoModels)
-        //        {
-        //            var chNode = new NodeTreeView
-        //            {
-        //                Id = autoModel.Id,
-        //                Name = autoModel.Name,
-        //                Type = "autoModel"
-        //            };
-        //            node.Subfolder.Add(chNode);
-        //        }
-        //        brands.Add(node);
-        //    }
-        //    return brands;
-        //}
-
         public ActionResult RenderTree()
         {
             return PartialView();
