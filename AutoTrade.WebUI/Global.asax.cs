@@ -34,6 +34,8 @@ namespace AutoTrade.WebUI
                 new { controller = "AutoModel", action = "Grid", id = UrlParameter.Optional } // Parameter defaults
             );
 
+           
+
         }
 
         protected void Application_Start()

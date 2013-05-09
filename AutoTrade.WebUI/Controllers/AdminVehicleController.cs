@@ -19,8 +19,6 @@ namespace AutoTrade.WebUI.Controllers
 
         public ActionResult VehiclesDigest(int? ActualAutoModels)
         {
-            //GetVehiclesByAutoModelName(idAutoModel)
-            //var vehicles=repository.VehiclesDetail;
             IQueryable<VehiclesDetails> vehicles;
 
             if (ActualAutoModels == null)
@@ -40,8 +38,8 @@ namespace AutoTrade.WebUI.Controllers
         public ViewResult Edit(int id)
         {
             VehiclesDetails vehicle = repository.GetVehicleDetailById(id);
-            //ViewBag.ActualBrands = new SelectList(repository.UniqueBrands, "Id", "Name");
             ViewBag.ActualBrandsName = repository.UniqueBrandsName;
+            ViewBag.Admin =  1;
             return View(vehicle);
         }
 
@@ -56,7 +54,6 @@ namespace AutoTrade.WebUI.Controllers
             }
             else
             {
-               // ViewBag.ActualBrands = new SelectList(repository.UniqueBrands, "Id", "Name", vehicle.Brand);
                 return View(vehicle);
             }
         }
@@ -64,6 +61,7 @@ namespace AutoTrade.WebUI.Controllers
         public ViewResult Create()
         {
             ViewBag.ActualBrandsName = repository.UniqueBrandsName;
+            ViewBag.Admin = 0;
             return View("Edit", new VehiclesDetails());
         }
 
