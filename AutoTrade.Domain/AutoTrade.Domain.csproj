@@ -114,7 +114,13 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AutoTradeModel.cs</LastGenOutput>
     </None>
+    <None Include="Connection.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SQL\0_SQLQuery_creteDB.sql" />
+    <Content Include="SQL\1_SQLQuery_creteTables.sql" />
+    <Content Include="SQL\2_SQLQuery_insertDataTables.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

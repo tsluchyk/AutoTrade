@@ -12,10 +12,14 @@
 {
         <div class="well well-small">
             <div class="row-fluid">
-                <div id="fieldsetSearch" class="control-group span6" style="visibility: hidden; display: none">
-                    <label id="gridSearchText" class="control-label"></label>
-                    <span id="spAutoModels" style="visibility: hidden; display: none; ">@Html.DropDownList("ActualAutoModels", String.Empty)</span>
-                    <span id="spBrands" style="visibility: hidden; display: none;">@Html.DropDownList("ActualBrands", String.Empty)</span>
+                <div class="control-group span6">
+                    <label class="control-label">Brands:</label>
+                    @Html.DropDownList("ActualBrands", String.Empty)
+                </div>
+
+                <div class="control-group span6">
+                    <label class="control-label">Auto models:</label>
+                    @Html.DropDownList("ActualAutoModels", String.Empty)
                 </div>
             </div>
 
@@ -94,11 +98,20 @@
         };
 
         $('#ActualBrands').change(function () {
-            document.getElementById("btnSubmit").click();
-        });
+            var selectedBrand = $("#ActualBrands option:selected").val();
 
-        $('#ActualAutoModels').change(function () {
-            document.getElementById("btnSubmit").click();
+            $('#ActualAutoModels').empty();
+            $('#ActualAutoModels').append('<option value=""></option>');
+
+            $.ajax({
+                url: "/AutoModel/GetAutoModelsByIdBrand?id=" + selectedBrand,
+                success: function (data) {
+                    $.each(data, function (i, item) {
+                        //$('#ActualAutoModels').append('<option value="' + item.Value + '">' + item.Text + '</option>');
+                        $('#ActualAutoModels').append(new Option(item.Text, item.Value));
+                    })
+                }
+            });
         });
 
         $('#ItemsPerPage').change(function () {

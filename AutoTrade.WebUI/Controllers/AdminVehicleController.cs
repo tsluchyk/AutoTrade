@@ -35,6 +35,24 @@ namespace AutoTrade.WebUI.Controllers
             return View(vehicles);
         }
 
+        //public ActionResult VehiclesDigest(int? Brand, int? ActualAutoModels)
+        //{
+        //    IQueryable<VehiclesDetails> vehicles;
+
+        //    if (ActualAutoModels == null)
+        //        vehicles = repository.VehiclesDetail;
+        //    else
+        //        vehicles = repository.GetVehiclesByAutoModelId((int)ActualAutoModels);
+
+        //    ViewBag.ActualAutoModels = new SelectList(repository.UniqueAutoModels, "Id", "Name");
+
+        //    if (Request.IsAjaxRequest())
+        //    {
+        //        return PartialView("Ajax_VehicleTable", vehicles);
+        //    }
+        //    return View(vehicles);
+        //}
+
         public ViewResult Edit(int id)
         {
             VehiclesDetails vehicle = repository.GetVehicleDetailById(id);

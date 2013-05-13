@@ -7,13 +7,13 @@ using System.Data;
 
 namespace AutoTrade.Domain.Concrete
 {
-    public class VehicleRepository:IVehiclesRepository
+    public class VehicleRepository : IVehiclesRepository
     {
         private AutoTradeEntities context = new AutoTradeEntities();
 
         public IQueryable<Vehicle> Vehicles
         {
-            get 
+            get
             {
                 return context.Vehicles;
             }
@@ -41,26 +41,26 @@ namespace AutoTrade.Domain.Concrete
 
         public IQueryable<VehiclesDetails> GetVehiclesByAutoModelId(int id)
         {
-                var vehicles = from v in context.Vehicles
-                               where v.IdAutoModel==id
-                               select new VehiclesDetails
-                               {
-                                   Id = v.Id,
-                                   Brand = v.AutoModel.Brand.Name,
-                                   AutoModel = v.AutoModel.Name,
-                                   Color = v.Color,
-                                   CubicCapacity = v.CubicCapacity,
-                                   Description = v.Description,
-                                   Price = v.Price,
-                                   History = v.PricesHistories
-                               };
-                return vehicles;
+            var vehicles = from v in context.Vehicles
+                           where v.IdAutoModel == id
+                           select new VehiclesDetails
+                           {
+                               Id = v.Id,
+                               Brand = v.AutoModel.Brand.Name,
+                               AutoModel = v.AutoModel.Name,
+                               Color = v.Color,
+                               CubicCapacity = v.CubicCapacity,
+                               Description = v.Description,
+                               Price = v.Price,
+                               History = v.PricesHistories
+                           };
+            return vehicles;
         }
 
         public VehiclesDetails GetVehicleDetailById(int id)
         {
             var v = context.Vehicles.Where(x => x.Id == id).FirstOrDefault();
-            
+
             return new VehiclesDetails
             {
                 Id = v.Id,
@@ -84,7 +84,10 @@ namespace AutoTrade.Domain.Concrete
         {
             context.Vehicles.Add(new Vehicle
             {
-                IdAutoModel = context.AutoModels.Where(x => x.Name.Equals(vehicle.AutoModel)).FirstOrDefault().Id,
+                // find auto model not only for Name? but Id
+                IdAutoModel = context.AutoModels.Where(x =>
+                    x.Name.Equals(vehicle.AutoModel) && x.Brand.Name.Equals(vehicle.Brand)
+                    ).FirstOrDefault().Id,
                 Color = vehicle.Color,
                 CubicCapacity = vehicle.CubicCapacity,
                 Price = vehicle.Price,
@@ -107,8 +110,10 @@ namespace AutoTrade.Domain.Concrete
         private void SaveEditVehicle(VehiclesDetails vehicle)
         {
             Vehicle v = context.Vehicles.Where(x => x.Id == vehicle.Id).FirstOrDefault();
-            v.AutoModel.Brand = context.Brands.Where(x => x.Name.Equals(vehicle.Brand)).FirstOrDefault();
-            v.IdAutoModel = context.AutoModels.Where(x => x.Name.Equals(vehicle.AutoModel)).FirstOrDefault().Id;
+           // v.AutoModel.Brand = context.Brands.Where(x => x.Name.Equals(vehicle.Brand)).FirstOrDefault();
+            v.IdAutoModel = context.AutoModels.Where(x => 
+                x.Name.Equals(vehicle.AutoModel) && x.Brand.Name.Equals(vehicle.Brand)
+                ).FirstOrDefault().Id;
             v.Color = vehicle.Color;
             v.CubicCapacity = vehicle.CubicCapacity;
             v.Price = vehicle.Price;
@@ -120,7 +125,16 @@ namespace AutoTrade.Domain.Concrete
 
         public void SaveVehicle(VehiclesDetails vehicle)
         {
+            //new model (name unique)
             if (context.AutoModels.Where(x => x.Name.Equals(vehicle.AutoModel)).FirstOrDefault() == null)
+                SaveNewAutoModel(vehicle);
+
+            //new model (name not unique , para brand-name unique)
+            if (context.AutoModels.Where(x =>
+                x.Name.Equals(vehicle.AutoModel)
+                &&
+                x.Brand.Name.Equals(vehicle.Brand)
+            ).FirstOrDefault() == null)
                 SaveNewAutoModel(vehicle);
 
             if (vehicle.Id == 0)
@@ -134,7 +148,7 @@ namespace AutoTrade.Domain.Concrete
             var id = vehicle.AutoModel.Id;
             context.Vehicles.Remove(vehicle);
 
-            var autoModel=context.AutoModels.Where(x=>x.Id==id).FirstOrDefault();
+            var autoModel = context.AutoModels.Where(x => x.Id == id).FirstOrDefault();
             if (autoModel.Vehicles.Count == 0)
             {
                 var idBrand = autoModel.IdBrand;
@@ -165,10 +179,10 @@ namespace AutoTrade.Domain.Concrete
 
         public IQueryable<AutoModel> UniqueAutoModels
         {
-            get 
+            get
             {
-                var models= (from m in context.Vehicles
-                             select m.AutoModel)
+                var models = (from m in context.Vehicles
+                              select m.AutoModel)
                              .Distinct();
                 return models;
             }
@@ -197,4 +211,4 @@ namespace AutoTrade.Domain.Concrete
             }
         }
     }
-} 
+}

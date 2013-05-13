@@ -180,6 +180,11 @@ namespace AutoTrade.Domain.Concrete
         //    return (IQueryable<decimal>)_capacities;
 
         //}
+        
+        public IQueryable<Brand> UniqueBrands
+        {
+            get { return context.Brands; }
+        }
 
 
         public IQueryable<AutoModel> UniqueAutoModels
@@ -190,9 +195,16 @@ namespace AutoTrade.Domain.Concrete
             }
         }
 
-        public IQueryable<Brand> UniqueBrands
+        public IQueryable<AutoModel> GetAutoModelsByIdBrand(int? idBrand)
         {
-            get { return context.Brands; }
+            if (idBrand == null)
+                return null;
+            else
+                return (from m in context.AutoModels
+                        where m.IdBrand == idBrand
+                        select m).Distinct();
         }
+
+       
     }
 }

@@ -8,22 +8,26 @@
         <th>Cubic Capacity</th>
         <th>Price</th>
         <th>Description</th>
-        <th>Actions</th>
+        <th colspan="2">Actions</th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>@item.Brand</td>
-        <td>@Html.ActionLink(item.AutoModel, "Edit", new {item.Id})</td>
+        <td>@item.AutoModel</td>
+        @*<td>@Html.ActionLink(item.AutoModel, "Edit", new {item.Id})</td>*@
         <td>@item.Color</td>
         <td>@item.CubicCapacity</td>
         <td>@item.Price</td>
         <td>@item.Description</td>
         <td>
+            <button onclick="location.href='@Url.Action("Edit", "AdminVehicle", new { item.Id })'" class="btn btn-primary btn-small" style="width:70px;">Edit</button>
+        </td>
+        <td>
         @using (Html.BeginForm("Delete", "AdminVehicle", FormMethod.Post, htmlAttributes: new { style = "margin:0px;" }))
         {
             @Html.Hidden("Id", item.Id)
-            <input class="btn btn-danger" type="submit" value="Delete" onclick = "return confirm('Are you sure you want to delete the vehicle?');" />
+            <input class="btn btn-danger btn-small" type="submit" value="Delete" onclick = "return confirm('Are you sure you want to delete the vehicle?');" />
         }
         </td>
     </tr>

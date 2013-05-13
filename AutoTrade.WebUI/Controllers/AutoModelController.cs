@@ -30,7 +30,11 @@ namespace AutoTrade.WebUI.Controllers
                                 int? ActualBrands=null)
         {
             ViewBag.ActualBrands = new SelectList(vehiclesSummaryRepository.UniqueBrands, "Id", "Name");
-            ViewBag.ActualAutoModels = new SelectList(vehiclesSummaryRepository.UniqueAutoModels, "Id", "Name");
+            //if (ActualBrands==null)
+            ViewBag.ActualAutoModels = new SelectList(new List<string>());
+            //else
+               // ViewBag.ActualAutoModels = new SelectList(vehiclesSummaryRepository.GetAutoModelsByIdBrand(ActualBrands), "Id", "Name");
+
 
             int totalItems;
             
@@ -97,6 +101,14 @@ namespace AutoTrade.WebUI.Controllers
             return Json(capacities, JsonRequestBehavior.AllowGet);
         }
 
+        [WebMethod]
+        public JsonResult GetAutoModelsByIdBrand(int? id)
+        {
+            var autoModels = vehiclesSummaryRepository.GetAutoModelsByIdBrand(id);
+            ViewBag.ActualAutoModels = new SelectList(autoModels, "Id", "Name");
+
+            return Json(ViewBag.ActualAutoModels, JsonRequestBehavior.AllowGet);
+        }
        
     }
 }

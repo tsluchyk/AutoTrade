@@ -34,10 +34,11 @@ namespace AutoTrade.Domain.Abstract
         IQueryable<string> GetUniqueCapacity(string capacityLetters, int maxCount);
        // IQueryable<decimal> GetUniqueCapacity(decimal capacityLetters, int maxCount);
 
-        IQueryable<AutoModel> UniqueAutoModels { get; }
-
         IQueryable<Brand> UniqueBrands { get; }
         
+        IQueryable<AutoModel> UniqueAutoModels { get; }
+
+        IQueryable<AutoModel> GetAutoModelsByIdBrand(int? idBrand);
     }
 }
 
