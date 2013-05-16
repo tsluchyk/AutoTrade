@@ -93,26 +93,16 @@
         function _updateGrid(e) {
             e.preventDefault();
             var url = $(this).attr('href');
-            var grid = $(this).parents('#ajaxGrid'); // get the grid
+            var grid = $(this).parents('#ajaxGrid');
             grid.load(url);
         };
 
-        $('#ActualBrands').change(function () {
-            var selectedBrand = $("#ActualBrands option:selected").val();
+        //$('#ActualBrands').live('change', _updateAutoModels);
+        // $('#ActualBrands').change(function () {
 
-            $('#ActualAutoModels').empty();
-            $('#ActualAutoModels').append('<option value=""></option>');
+        $('#ActualBrands').change(_updateAutoModels);
 
-            $.ajax({
-                url: "/AutoModel/GetAutoModelsByIdBrand?id=" + selectedBrand,
-                success: function (data) {
-                    $.each(data, function (i, item) {
-                        //$('#ActualAutoModels').append('<option value="' + item.Value + '">' + item.Text + '</option>');
-                        $('#ActualAutoModels').append(new Option(item.Text, item.Value));
-                    })
-                }
-            });
-        });
+        
 
         $('#ItemsPerPage').change(function () {
             document.getElementById("btnSubmit").click();
@@ -142,4 +132,23 @@
 
     });
 
-</script>
+    function _updateAutoModels(model) {
+        var selectedBrand = $("#ActualBrands option:selected").val();
+ 
+        $('#ActualAutoModels').empty();
+        $('#ActualAutoModels').append('<option value=""></option>');
+
+        $.ajax({
+            url: "/AutoModel/GetAutoModelsByIdBrand?id=" + selectedBrand,
+            success: function (data) {
+                $.each(data, function (i, item) {
+                    if (item.Text == model) {
+                        $('#ActualAutoModels').append('<option value="' + item.Value + '" selected="selected">' + item.Text + '</option>');
+                    } else {
+                        $('#ActualAutoModels').append('<option value="' + item.Value + '">' + item.Text + '</option>');
+                    }
+                })
+            }
+        });
+    };
+ </script>

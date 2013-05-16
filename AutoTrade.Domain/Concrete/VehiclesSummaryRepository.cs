@@ -93,7 +93,7 @@ namespace AutoTrade.Domain.Concrete
                                                                         int? idAutoModel = null,
                                                                         int? idBrand = null)
         {
-            totalItems = context.Vehicles.Count();
+           // totalItems = context.Vehicles.Count();
 
             var vehicles = new VehicleSearchSpecification() 
             {
@@ -128,6 +128,8 @@ namespace AutoTrade.Domain.Concrete
             {
                 vehiclesSummary = vehiclesSummary.Skip(pageIndex * itemPerPage).Take(itemPerPage);
             }
+
+            totalItems = vehicles.Count();
             return vehiclesSummary;
         }
 

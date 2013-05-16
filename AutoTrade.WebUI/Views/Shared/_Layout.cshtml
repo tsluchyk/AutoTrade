@@ -63,6 +63,7 @@
     </div>
 </div>
 
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('#tree').treeview({
@@ -72,39 +73,33 @@
                 }
             });
 
-            //            $('#tree li').live("click", function () {
-            //                 alert($(this).attr('id'));
-            //            });
-
             $('#tree .folder').live("click", function () {
                 var idItem = $(this).closest('li').attr('id');
-                document.getElementById("#ActualBrands").setAttribute("selectedValue",idItem);
-                document.getElementById("#btnSubmit").click();
+
+                document.forms[0].reset();
+
+                $('#ActualBrands')[0].selectedIndex = idItem;
+                _updateAutoModels();
+
+                $('#gridContainer').load('@Url.Action("Grid", "AutoModel")', { ActualBrands: idItem });
             });
 
             $('#tree .file').live("click", function () {
                 var idItem = $(this).closest('li').attr('id');
-                //alert("node={" + idItem + "}");
-
                 var idParentItem = $(this).closest('li.collapsable').attr('id');
-                //alert("parent={" + idParentItem + "}");
+                var nameItem = $(this).text();
+
+                document.forms[0].reset();
+
+                $('#ActualBrands')[0].selectedIndex = idParentItem;
+
+                _updateAutoModels(nameItem);
+              
+                $('#gridContainer').load('@Url.Action("Grid", "AutoModel")', { ActualBrands: idParentItem, ActualAutoModels: idItem });
+
             });
-
-            //            $('#tree .folder').live("click", function(){
-            //                document.getElementById("gridSearchText").innerHTML="Auto Brand:"
-            //                document.getElementById("fieldsetSearch").setAttribute("style", "visibility:visible")
-            //                document.getElementById("spAutoModels").setAttribute("style", "visibility:hidden; display:none")
-            //                document.getElementById("spBrands").setAttribute("style", "visibility:visible")
-            //            });
-
-            //            $('#tree .file').live("click", function () {
-            //                document.getElementById("gridSearchText").innerHTML ="Auto Model:"
-            //                document.getElementById("fieldsetSearch").setAttribute("style", "visibility:visible")
-            //                document.getElementById("spAutoModels").setAttribute("style", "visibility:visible")
-            //                document.getElementById("spBrands").setAttribute("style", "visibility:hidden; display:none")
-            //            });
-
         });
+
     </script>
     
 </body>

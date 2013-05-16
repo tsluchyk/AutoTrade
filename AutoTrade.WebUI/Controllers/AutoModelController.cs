@@ -30,12 +30,8 @@ namespace AutoTrade.WebUI.Controllers
                                 int? ActualBrands=null)
         {
             ViewBag.ActualBrands = new SelectList(vehiclesSummaryRepository.UniqueBrands, "Id", "Name");
-            //if (ActualBrands==null)
             ViewBag.ActualAutoModels = new SelectList(new List<string>());
-            //else
-               // ViewBag.ActualAutoModels = new SelectList(vehiclesSummaryRepository.GetAutoModelsByIdBrand(ActualBrands), "Id", "Name");
-
-
+            
             int totalItems;
             
             VehiclesSummaryModelForPaging vehiclesModel = new VehiclesSummaryModelForPaging
@@ -58,7 +54,8 @@ namespace AutoTrade.WebUI.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = itemsPerPage,
-                    TotalItems = vehiclesSummaryRepository.VehiclesSummary.Count()
+                   // TotalItems = vehiclesSummaryRepository.VehiclesSummary.Count()
+                   TotalItems = totalItems
                 }
             };
 
