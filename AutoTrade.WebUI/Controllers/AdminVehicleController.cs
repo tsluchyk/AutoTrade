@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AutoTrade.Domain.Abstract;
 using AutoTrade.Domain.Concrete;
+using System.Web.Services;
 
 namespace AutoTrade.WebUI.Controllers
 {
@@ -17,25 +18,7 @@ namespace AutoTrade.WebUI.Controllers
             repository = repo;
         }
 
-        public ActionResult VehiclesDigest(int? ActualAutoModels)
-        {
-            IQueryable<VehiclesDetails> vehicles;
-
-            if (ActualAutoModels == null)
-                vehicles = repository.VehiclesDetail;
-            else
-                vehicles = repository.GetVehiclesByAutoModelId((int)ActualAutoModels);
-
-            ViewBag.ActualAutoModels = new SelectList(repository.UniqueAutoModels, "Id", "Name");
-
-            if (Request.IsAjaxRequest())
-            {
-                return PartialView("Ajax_VehicleTable", vehicles);
-            }
-            return View(vehicles);
-        }
-
-        //public ActionResult VehiclesDigest(int? Brand, int? ActualAutoModels)
+        //public ActionResult VehiclesDigest(int? ActualAutoModels)
         //{
         //    IQueryable<VehiclesDetails> vehicles;
 
@@ -53,6 +36,33 @@ namespace AutoTrade.WebUI.Controllers
         //    return View(vehicles);
         //}
 
+        public ActionResult VehiclesDigest(int? ActualBrands=null, int? ActualAutoModels=null)
+        {
+            ViewBag.ActualBrands = new SelectList(repository.UniqueBrands , "Id", "Name");
+            ViewBag.ActualAutoModels = new SelectList(new List<string>());
+
+            IQueryable<VehiclesDetails> vehicles = repository.GetVehiclesByParams(ActualBrands, ActualAutoModels);
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Ajax_VehicleTable", vehicles);
+            }
+            return View(vehicles);
+        }
+
+        [WebMethod]
+        public JsonResult GetAutoModelsByBrandId(int? id)
+        {
+            var autoModels = repository.GetAutoModelsByBrandId(id);
+              
+            if (autoModels != null)
+                ViewBag.ActualAutoModels = new SelectList(autoModels, "Id", "Name");
+
+            return Json(ViewBag.ActualAutoModels, JsonRequestBehavior.AllowGet);
+        }
+
+
+  
         public ViewResult Edit(int id)
         {
             VehiclesDetails vehicle = repository.GetVehicleDetailById(id);

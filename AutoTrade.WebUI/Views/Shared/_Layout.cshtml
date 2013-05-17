@@ -65,38 +65,13 @@
 
 
     <script type="text/javascript">
+       
         $(document).ready(function () {
             $('#tree').treeview({
                 url: '@Url.Action("RenderTree", "TreeView")',
                 ajax: {
                     type: 'post'
                 }
-            });
-
-            $('#tree .folder').live("click", function () {
-                var idItem = $(this).closest('li').attr('id');
-
-                document.forms[0].reset();
-
-                $('#ActualBrands')[0].selectedIndex = idItem;
-                _updateAutoModels();
-
-                $('#gridContainer').load('@Url.Action("Grid", "AutoModel")', { ActualBrands: idItem });
-            });
-
-            $('#tree .file').live("click", function () {
-                var idItem = $(this).closest('li').attr('id');
-                var idParentItem = $(this).closest('li.collapsable').attr('id');
-                var nameItem = $(this).text();
-
-                document.forms[0].reset();
-
-                $('#ActualBrands')[0].selectedIndex = idParentItem;
-
-                _updateAutoModels(nameItem);
-              
-                $('#gridContainer').load('@Url.Action("Grid", "AutoModel")', { ActualBrands: idParentItem, ActualAutoModels: idItem });
-
             });
         });
 

@@ -18,9 +18,20 @@
 {
     <div class="well well-small">
         <fieldset><legend>Search</legend>
-            <label class="control-label">Auto model:</label>
-            @Html.DropDownList("ActualAutoModels", String.Empty)
-            <input type="submit" value="Search" id="btnSubmit" style="visibility:hidden"/>
+
+        <div class="row-fluid">
+            <div class="control-group span6">
+                <label class="control-label">Brands:</label>
+                @Html.DropDownList("ActualBrands", String.Empty)
+            </div>
+            <div class="control-group span6">
+                <label class="control-label">Auto models:</label>
+                @Html.DropDownList("ActualAutoModels", String.Empty)
+            </div>
+        </div>
+
+        <input type="submit" value="Search" id="btnSubmit" style="visibility:hidden; display:none;"/>
+
         </fieldset> 
     </div>
 }
@@ -33,10 +44,64 @@
 
     $(document).ready(function () {
 
+        $('#ActualBrands').change(function () {
+            alert("In change");
+            _updateAutoModels();
+            document.getElementById("btnSubmit").click();
+        });
         $('#ActualAutoModels').change(function () {
             document.getElementById("btnSubmit").click();
         });
 
+
+        $('#tree .folder').live("click", function () {
+            var idItem = $(this).closest('li').attr('id');
+
+            document.forms[0].reset();
+
+            $('#ActualBrands')[0].selectedIndex = idItem;
+            _updateAutoModels();
+
+            $('#tableVehicle').load('@Url.Action("VehiclesDigest", "AdminVehicle")', { ActualBrands: idItem });
+        });
+
+        $('#tree .file').live("click", function () {
+            var idItem = $(this).closest('li').attr('id');
+            var idParentItem = $(this).closest('li.collapsable').attr('id');
+            var nameItem = $(this).text();
+
+            document.forms[0].reset();
+
+            $('#ActualBrands')[0].selectedIndex = idParentItem;
+
+            _updateAutoModels(nameItem);
+
+            $('#tableVehicle').load('@Url.Action("VehiclesDigest", "AdminVehicle")', { ActualBrands: idParentItem, ActualAutoModels: idItem });
+
+        });
+
+
     });
+
+    function _updateAutoModels(model) {
+        var selectedBrand = $("#ActualBrands option:selected").val();
+
+        $('#ActualAutoModels').empty();
+        $('#ActualAutoModels').append('<option value=""></option>');
+
+        $.ajax({
+            url: "/AdminVehicle/GetAutoModelsByBrandId?id=" + selectedBrand,
+            success: function (data) {
+                $.each(data, function (i, item) {
+                    if (item.Text == model) {
+                        $('#ActualAutoModels').append('<option value="' + item.Value + '" selected="selected">' + item.Text + '</option>');
+                    } else {
+                        $('#ActualAutoModels').append('<option value="' + item.Value + '">' + item.Text + '</option>');
+                    }
+                })
+            }
+        });
+    };
+
 
 </script>

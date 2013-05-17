@@ -57,6 +57,40 @@ namespace AutoTrade.Domain.Concrete
             return vehicles;
         }
 
+        public IQueryable<VehiclesDetails> GetVehiclesByParams(int? idBrand, int? idAutoModel)
+        {
+            var vehicles = new VehicleSearchSpecification()
+            {
+                IdAutoModel = idAutoModel,
+                IdBrand = idBrand
+            }.SatisfiedBy(context.Vehicles);
+
+            var vehiclesSequence = from v in vehicles
+                           select new VehiclesDetails
+                           {
+                               Id = v.Id,
+                               Brand = v.AutoModel.Brand.Name,
+                               AutoModel = v.AutoModel.Name,
+                               Color = v.Color,
+                               CubicCapacity = v.CubicCapacity,
+                               Description = v.Description,
+                               Price = v.Price,
+                               History = v.PricesHistories
+                           };
+            return vehiclesSequence;
+        }
+
+        public IQueryable<AutoModel> GetAutoModelsByBrandId(int? idBrand)
+        {
+            if (idBrand == null)
+                return null;
+            else
+                return (from a in context.AutoModels
+                              where a.IdBrand == idBrand
+                              select a)
+                              .Distinct();
+        }
+
         public VehiclesDetails GetVehicleDetailById(int id)
         {
             var v = context.Vehicles.Where(x => x.Id == id).FirstOrDefault();
@@ -210,5 +244,8 @@ namespace AutoTrade.Domain.Concrete
                 return brands;
             }
         }
+
+
+        
     }
 }

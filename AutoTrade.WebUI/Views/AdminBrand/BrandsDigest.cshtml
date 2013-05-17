@@ -6,7 +6,6 @@
 
 <h2>Brands Digest</h2>
 <button onclick="location.href='@Url.Action("Create", "AdminBrand")'" class="btn btn-primary">Create new brand</button>
-@* <p>@Html.ActionLink("Add new brand", "Create")</p>*@
 
 @using (Ajax.BeginForm("BrandsDigest", "AdminBrand", new AjaxOptions
     {
@@ -19,7 +18,7 @@
     <div class="well well-small">
         <fieldset><legend>Search</legend>
                      <label class="control-label">Brands:</label>
-                     @Html.DropDownList("IdBrand", new SelectList(Model, "Id", "Name"), String.Empty)
+                     @Html.DropDownList("ActualBrands", new SelectList(Model, "Id", "Name"), String.Empty)
                      <input type="submit" value="Search" id="btnSubmit" style="visibility:hidden" />
         </fieldset>
     </div>
@@ -33,10 +32,22 @@
 
     $(document).ready(function () {
 
-        $('#IdBrand').change(function () {
+        $('#ActualBrands').change(function () {
             document.getElementById("btnSubmit").click();
         });
     });
+
+    $('#tree .folder').live("click", function () {
+        var idItem = $(this).closest('li').attr('id');
+       
+        document.forms[0].reset();
+
+        $('#ActualBrands')[0].selectedIndex = idItem;
+
+        $('#tableBrands').load('@Url.Action("BrandsDigest", "AdminBrand")', { ActualBrands: idItem });
+
+    });
+       
 </script>
 
 

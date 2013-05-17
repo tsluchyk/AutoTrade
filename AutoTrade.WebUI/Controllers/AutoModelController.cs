@@ -102,7 +102,8 @@ namespace AutoTrade.WebUI.Controllers
         public JsonResult GetAutoModelsByIdBrand(int? id)
         {
             var autoModels = vehiclesSummaryRepository.GetAutoModelsByIdBrand(id);
-            ViewBag.ActualAutoModels = new SelectList(autoModels, "Id", "Name");
+            if(autoModels!=null)
+                ViewBag.ActualAutoModels = new SelectList(autoModels, "Id", "Name");
 
             return Json(ViewBag.ActualAutoModels, JsonRequestBehavior.AllowGet);
         }

@@ -17,16 +17,16 @@ namespace AutoTrade.WebUI.Controllers
             repository = repo;
         }
 
-        public ActionResult BrandsDigest(int? IdBrand)
+        public ActionResult BrandsDigest(int? ActualBrands)
         {
             List<Brand> brands = new List<Brand>();
 
-            if (IdBrand == null)
+            if (ActualBrands == null)
                 foreach (var b in repository.Brands)
                     brands.Add(b);
             else
             {
-                brands.Add(repository.GetBrandById((int)IdBrand));
+                brands.Add(repository.GetBrandById((int)ActualBrands));
             }
 
             if(Request.IsAjaxRequest())
